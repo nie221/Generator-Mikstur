@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Księga Mikstur</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #1e1e1e;
+            color: #dcdcdc;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #00ff99;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            background-color: #2e2e2e;
+            border: 1px solid #444;
+            color: white;
+        }
+        .potion {
+            background: #2a2a2a;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #00ff99;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #00ff99;
+            border: none;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stwórz Własną Miksturę</h1>
+    <form id="potionForm">
+        <label>Nazwa mikstury:</label>
+        <input type="text" id="name" required />
+
+        <label>Składniki:</label>
+        <input type="text" id="ingredients" placeholder="np. Nether Wart, Blaze Powder" required />
+
+        <label>Efekt:</label>
+        <input type="text" id="effect" placeholder="np. +2 serca na 3 minuty" required />
+
+        <label>Opis:</label>
+        <textarea id="description" rows="4"></textarea>
+
+        <button type="submit">Dodaj miksturę</button>
+    </form>
+
+    <h2>Twoje Mikstury</h2>
+    <div id="customPotions"></div>
+
+    <script>
+        const form = document.getElementById('potionForm');
+        const potionList = document.getElementById('customPotions');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const ingredients = document.getElementById('ingredients').value;
+            const effect = document.getElementById('effect').value;
+            const description = document.getElementById('description').value;
+
+            const potionHTML = `
+                <div class="potion">
+                    <h3>${name}</h3>
+                    <p><strong>Składniki:</strong> ${ingredients}</p>
+                    <p><strong>Efekt:</strong> ${effect}</p>
+                    <p>${description}</p>
+                </div>
+            `;
+
+            potionList.innerHTML += potionHTML;
+
+            form.reset();
+        });
+    </script>
+</body>
+</html>
